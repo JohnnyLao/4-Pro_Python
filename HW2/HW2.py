@@ -17,18 +17,19 @@ organization = []
 position = []
 phone = []
 email = []
-for q in contacts_list:
-    # print(q)
-    pattern1 = r'(\w+)\s(\w+)\s(\w+)|(\w+)|(\w+)\s(\w+)'
-    compiled = re.compile(pattern1)
-    result = compiled.findall(str(q))
-    print(result[0:3])
-    # firstname.append(result[0])
 
-# pattern2 = r'(\+7|8)\s?[(\s]?(\d+)[)\s-][\s-]?(\d+)-(\d\d)-?(\d+)\s?(?(доб.)?\s?(\d+)?)?'
-# compiled = re.compile(pattern2)
-# result1 = compiled.findall(q)
-# print(result1)
+for q in contacts_list:
+    w = (" ".join(q))
+    print(w)
+    pattern1 = r'([А-Я]{1}[а-яё]{1,23})\s([А-Я]{1}[а-яё]{1,23})\s?([А-Я]{1}[а-яё]{1,23})?'
+    compiled1 = re.compile(pattern1)
+    result = re.findall(pattern1, str(q))
+    print(result)
+
+    pattern2 = r'(\+7|8)?\s?\(?(\d+)\)?\s?(\d+)[-|\s]?(\d+)[-|\s]?(\d+)\(?[доб.]?\s?(\d+)?'
+    compiled2 = re.compile(pattern2)
+    result2 = compiled2.findall(str(q))
+    print(result2)
 
 # TODO 2: сохраните получившиеся данные в другой файл
 # код для записи файла в формате CSV
