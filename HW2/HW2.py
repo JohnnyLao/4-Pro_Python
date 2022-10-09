@@ -27,26 +27,49 @@ def name_add():
             column[0] = re.sub(fio, sub, line).split()[0]
             column[1] = ''
             column[2] = ''
+        return
+
 
 def phone_add():
-    phone = r"(\+\d|\d)\s*(\(|)(\d{3})[\s\)-]*(\d{3})\-*(\d{2})\-*(\d{2})(\s\(?доб.\s\d+)?"
-    # sub = r'+7(\3)\4-\5-\6\s\7'
-    compiled2 = re.compile(phone)
-    result2 = compiled2.match(str(w))
-    # sub_result = re.sub(phone, sub, w) ПРИ ЗАМЕНЕ ВЫДАЁТ ГОРУ ОШИБОК, ПРОБЛЕМА В ЦИКЛЕ? Как вывести текст из списка в текст?
-    # print(result2)
+    phone = re.compile(r'(\+\d|\d)\s*(\(|)(\d{3})[\s\)-]*(\d{3})\-*(\d{2})\-*(\d{2})(\s\(?доб.\s\d+)?')
+    sub = r'+7 (\3) \4-\5-\6 \7'
+    for column in contacts_list:
+        column[5] = phone.sub(sub, column[5])
+    return
 
 
-if __name__ == '__main__':
+def dup():
+    for column in contacts_list[1:]:
+        first_name = column[0]
+        last_name = column[1]
+        for contact in contacts_list:
+            new_first_name = contact[0]
+            new_last_name = contact[1]
+            if first_name == new_first_name and last_name == new_last_name:
+                if column[2] == '':
+                    column[2] = contact[2]
+                if column[3] == '':
+                    column[3] = contact[3]
+                if column[4] == '':
+                    column[4] = contact[4]
+                if column[5] == '':
+                    column[5] = contact[5]
+                if column[6] == '':
+                    column[6] = contact[6]
     for contact in contacts_list:
         if contact != new_list:
             new_list.append(contact)
+    return
+
+
+if __name__ == '__main__':
     name_add()
+    phone_add()
+    dup()
     print(new_list)
 
 
 # TODO 2: сохраните получившиеся данные в другой файл
-# код для записи файла в формате CSV
 with open("phonebook.csv", "w") as f:
     datawriter = csv.writer(f, delimiter=',')
     datawriter.writerows(new_list)
