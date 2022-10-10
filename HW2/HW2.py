@@ -66,7 +66,7 @@ if __name__ == '__main__':
     name_add()
     phone_add()
     dup()
-    print(new_list)
+    # print(new_list)
 
 
 # TODO 2: сохраните получившиеся данные в другой файл
