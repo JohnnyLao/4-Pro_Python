@@ -8,13 +8,14 @@ with open("phonebook_raw.csv", encoding="UTF_8") as f:
     new_list = []
 
 # TODO 1: выполните пункты 1-3 ДЗ
-
-
 def name_add():
-    fio = r'([А-Я]{1}[а-яё]{1,23})'
-    sub = r'\1'
+    fio = r'^(\w+)( |,)(\w+)( |,)(\w+|),(,+|)(,,,|[А-Яа-я]+)'
+    sub = r'\1,\3,\5,\7'
     for column in contacts_list[1:]:
+        # pprint(column)
         line = column[0] + column[1] + column[2]
+        print(line)
+        print(len((re.sub(fio, sub, line).split())))
         if len((re.sub(fio, sub, line).split())) == 3:
             column[0] = re.sub(fio, sub, line).split()[0]
             column[1] = re.sub(fio, sub, line).split()[1]
@@ -27,7 +28,7 @@ def name_add():
             column[0] = re.sub(fio, sub, line).split()[0]
             column[1] = ''
             column[2] = ''
-        return
+    return
 
 
 def phone_add():
