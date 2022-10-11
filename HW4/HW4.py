@@ -23,16 +23,16 @@ class iterator:
 
 def generator(new_list_1):
     for item in new_list_1:
-        for element in item:
-            yield element
+        for item1 in item:
+            yield item1
 
 
 if __name__ == '__main__':
 
     print("ITERATOR:")
-    for element in iterator(nested_list):
-        print(element)
+    for item in iterator(nested_list):
+        print(item)
 
     print("GENERATOR:")
-    for item_1 in generator(nested_list):
-        print(item_1)
+    for item in generator(nested_list):
+        print(item)
