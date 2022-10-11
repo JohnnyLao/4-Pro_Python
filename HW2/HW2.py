@@ -9,8 +9,8 @@ with open("phonebook_raw.csv", encoding="UTF_8") as f:
 
 # TODO 1: выполните пункты 1-3 ДЗ
 def name_add():
-    fio = r'^(\w+)( |,)(\w+)( |,)(\w+|),(,+|)(,,,|[А-Яа-я]+)'
-    sub = r'\1,\3,\5,\7'
+    fio = r'([А-Я])'
+    sub = r' \1'
     for column in contacts_list[1:]:
         # pprint(column)
         line = column[0] + column[1] + column[2]
