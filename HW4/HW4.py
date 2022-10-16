@@ -8,7 +8,7 @@ nested_list = [
 class iterator:
 
     def __init__(self, new_list):
-        self.new_list = [object for item in nested_list for object in item]
+        self.new_list = [object for item in new_list for object in item]
 
     def __iter__(self):
         self.cursor = -1
@@ -21,8 +21,8 @@ class iterator:
         return self.new_list[self.cursor]
 
 
-def generator(new_list_1):
-    for item in new_list_1:
+def generator(new_list):
+    for item in new_list:
         for item1 in item:
             yield item1
 
