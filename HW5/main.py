@@ -1,7 +1,5 @@
-import os
-from decor import logging
+from decor import decor, parametrized_decor
 
-path = os.path.join(os.getcwd(), 'log.txt')
 
 nested_list = [
     ['a', 'b', 'c'],
@@ -10,7 +8,14 @@ nested_list = [
 ]
 
 
-@logging(path)
+@decor
+def generator(new_list):
+    for item in new_list:
+        for item1 in item:
+            yield item1
+
+
+@parametrized_decor("log.txt")
 def generator(new_list):
     for item in new_list:
         for item1 in item:
@@ -18,5 +23,8 @@ def generator(new_list):
 
 
 if __name__ == '__main__':
+
     for item in generator(nested_list):
         print(item)
+
+
